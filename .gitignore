@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+*.iml
+out
+gen
+.idea/.gitignore
+.idea/mern-boilerplate.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+node_modules/

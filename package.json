@@ -1,0 +1,27 @@
+{
+  "name": "mern-boilerplate",
+  "version": "1.0.0",
+  "description": "A boiler plate for Mongo DB, Express, React and Node stack, This includes basic authentication and basic route protection.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clinsmann/mern-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clinsmann/mern-boilerplate/issues"
+  },
+  "homepage": "https://github.com/Clinsmann/mern-boilerplate#readme",
+  "dependencies": {
+    "cookie-parse": "^0.4.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.16"
+  }
+}
