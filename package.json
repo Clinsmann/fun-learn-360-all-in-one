@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "description": "A boiler plate for Mongo DB, Express, React and Node stack, This includes basic authentication and basic route protection.",
   "main": "app.js",
+  "engines": {
+    "node": "12.17.0",
+    "npm": "6.14.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -21,8 +28,11 @@
   "homepage": "https://github.com/Clinsmann/mern-boilerplate#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.16",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

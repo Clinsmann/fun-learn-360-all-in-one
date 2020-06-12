@@ -1,21 +1,19 @@
+// const dotenv = require('dotenv');
 const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+const userRouter = require('./routes/User');
 const cookieParser = require('cookie-parser');
+
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+
+// dotenv.config();
+const app = express();
+const port = process.env.PORT;
+
+require('./database/mongoose');
+
 app.use(cookieParser());
 app.use(express.json());
+app.use('/user', userRouter);
 
-mongoose.connect('mongodb://localhost:27017/mernauth',
-  {useNewUrlParser: true, useUnifiedTopology: true},
-  () => console.log('successfully connected to database'));
 
-const User = require('./models/User');
-
-const userInput = {username: 'clins', password: "clins", role: 'admin'};
-const user = new User(userInput);
-user.save((err, document) => {
-  if (err) console.log(err);
-  console.log(document);
-})
-
-app.listen(5000, () => console.log('express server started'));
+app.listen(port, () => console.log(`application started on port ${port}...`));
