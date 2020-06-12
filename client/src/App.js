@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Home from './Components/Home';
+import Admin from './Components/Admin';
+import Login from "./Components/Login";
+import Todos from "./Components/Todos";
+import Navbar from "./Components/Navbar";
+import Register from "./Components/Register";
+import PrivateRoute from "./hocs/PrivateRoute";
+import UnPrivateRoute from "./hocs/UnPrivateRoute";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
-function App() {
+export default () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar/>
+      <div className='container'>
+        <Route exact path={['/', '/home']} component={Home}/>
+        <UnPrivateRoute path='/login' component={Login}/>
+        <UnPrivateRoute path='/register' component={Register}/>
+        <PrivateRoute path='/admin' roles={['admin']} component={Admin}/>
+        <PrivateRoute path='/todos' roles={['user', 'admin']} component={Todos}/>
+      </div>
+    </Router>
   );
-}
-
-export default App;
+};
