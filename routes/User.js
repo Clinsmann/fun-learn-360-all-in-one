@@ -4,24 +4,25 @@ const JWT = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('../models/User');
 const Todo = require('../models/Todo');
-const passportConfig = require('../passport');
+// const passportConfig = require('../passport');
+const {errorMessage, successMessage} = require('../utils/response');
 
-const signToken = userID => (JWT.sign(
-  {iss: "clinsCoder", sub: userID},
-  'clinsCoder',
+const signToken = user => (JWT.sign(
+  {iss: process.env.JWT_SECRET, sub: user._id, user},
+  process.env.JWT_SECRET,
   {expiresIn: "1 day"}
 ));
 
 userRouter.post('/register', (req, res) => {
   const {username, password, role} = req.body;
   User.findOne({username}, (err, user) => {
-    if (err) res.status(500).json({message: {msgBody: err, msgError: true}});
-    if (user) res.status(500).json({message: {msgBody: 'Username is already taken', msgError: true}});
+    if (err) res.status(500).json(errorMessage(err));
+    if (user) res.status(500).json(errorMessage('Username is already taken'));
     else {
       const newUser = new User({username, password, role});
       newUser.save(err => {
-        if (err) res.status(500).json({message: {msgBody: err, msgError: true}});
-        else res.status(201).json({message: {msgBody: 'Account successfully created', msgError: false}});
+        if (err) res.status(500).json(errorMessage(err));
+        else res.status(201).json(successMessage('Account successfully created'));
       })
     }
   });
@@ -30,7 +31,7 @@ userRouter.post('/register', (req, res) => {
 userRouter.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
   if (req.isAuthenticated()) {
     const {_id, username, role} = req.user;
-    const token = signToken(_id);
+    const token = signToken({_id, username, role});
     res.cookie('access_token', token, {httpOnly: true, sameSite: true});
     res.status(200).json({isAuthenticated: true, user: {username, role}});
   }
@@ -41,30 +42,28 @@ userRouter.get('/logout', passport.authenticate('jwt', {session: false}), (req, 
   res.json({user: {username: '', role: ''}, success: true});
 });
 
-userRouter.post('/todo', passport.authenticate('jwt', {session: false}), (req, res) => {
-  const todo = new Todo(req.body);
-  todo.save(err => {
-    if (err) res.status(500).json({message: {msgBody: 'Error has occurred', msgError: true}});
-    else {
-      req.user.todos.push(todo);
-      req.user.save(err => {
-        if (err) res.status(500).json({message: {msgBody: 'Error has occurred', msgError: true}});
-        else res.status(200).json({message: {msgBody: 'Successfully created todo', msgError: false}});
-      });
-    }
-  });
+userRouter.post('/todo', passport.authenticate('jwt', {session: false}), async (req, res) => {
+  try {
+    const todo = new Todo(req.body);
+    await todo.save();
+    req.user.todos.push(todo);
+    await req.user.save();
+    res.status(200).json(successMessage('Successfully created todo'));
+  } catch (e) {
+    res.status(500).json(errorMessage('Error creating todo'));
+  }
 });
 
 userRouter.get('/todo', passport.authenticate('jwt', {session: false}), (req, res) => {
   User.findById({_id: req.user._id}).populate('todos').exec((err, document) => {
-    if (err) res.status(500).json({message: {msgBody: 'Error has occurred', msgError: true}});
+    if (err) res.status(500).json(errorMessage('Error has occurred'));
     else res.status(200).json({todos: document.todos, authenticated: true});
   });
 });
 
 userRouter.get('/admin', passport.authenticate('jwt', {session: false}), (req, res) => {
-  if (req.user.role === 'admin') res.status(200).json({message: {msgBody: 'You are an admin', msgError: false}});
-  else res.status(403).json({message: {msgBody: 'You are not an admin', msgError: true}});
+  if (req.user.role === 'admin') res.status(200).json(successMessage('You are an admin'));
+  else res.status(403).json(errorMessage('You are not an admin'));
 });
 
 userRouter.get('/authenticated', passport.authenticate('jwt', {session: false}), (req, res) => {
