@@ -4,7 +4,7 @@ const JWT = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('../models/User');
 const Todo = require('../models/Todo');
-// const passportConfig = require('../passport');
+const passportConfig = require('../passport');//do not remove passport config
 const {errorMessage, successMessage} = require('../utils/response');
 
 const signToken = user => (JWT.sign(

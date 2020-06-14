@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import AuthService from "../Services/AuthService";
-import Message from '../Components/Message';
+import Message from './Message';
 
 export default props => {
   const initUser = {username: '', password: '', role: ''};
