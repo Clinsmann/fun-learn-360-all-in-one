@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "cera_pro";
+  src: url("../fonts/cerapro/cerapro-regular-webfont.woff2") format("woff2"),
+    url("../fonts/cerapro/cerapro-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "cera_pro";
+  src: url("../fonts/cerapro/cerapro-light-webfont.woff2") format("woff2"),
+    url("../fonts/cerapro/cerapro-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "cera_pro";
+  src: url("../fonts/cerapro/cerapro-medium-webfont.woff2") format("woff2"),
+    url("../fonts/cerapro/cerapro-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "cera_pro";
+  src: url("../fonts/cerapro/cerapro-bold-webfont.woff2") format("woff2"),
+    url("../fonts/cerapro/cerapro-bold-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  line-height: 20px;
+  /*color: #003c58;*/
+  text-rendering: optimizeSpeed;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  background: #f1f6f9;
+}
+
+body {
+  margin: 0;
+  font-family: "cera_pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.Toastify__toast-container.toast__container,
+.Toastify__toast.toast__toast,
+.Toastify__toast-body.toast__body {
+  font-family: "cera_pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", sans-serif;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  width: unset;
+}
+
+.Toastify__toast-container.toast__container,
+.Toastify__toast-body.toast__body {
+  width: unset;
+}
+
+.Toastify__toast.toast__toast {
+  margin-bottom: 1rem;
+}
+
+.Toastify__toast.toast__toast {
+  min-height: auto;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
