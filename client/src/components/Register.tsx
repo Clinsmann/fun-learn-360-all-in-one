@@ -94,9 +94,9 @@ interface MapDispatchProps {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchProps => ({
-  clearSignupData: () => dispatch({type: clearSignupData}),
-  clearSignupError: () => dispatch({type: clearSignupError}),
-  signupUser: (payload: SignupCredentials) => dispatch({type: signupUser, payload})
+  clearSignupData: () => dispatch({type: clearSignupData.fulfilled}),
+  clearSignupError: () => dispatch({type: clearSignupError.fulfilled}),
+  signupUser: (payload: SignupCredentials) => dispatch({type: signupUser.default, payload})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

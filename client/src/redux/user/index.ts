@@ -11,6 +11,8 @@ const INITIAL_STATE: UserState = {
   ...cachedUser,
 };
 
+// todo no error notification when login is not successful
+
 export default function user(state = INITIAL_STATE, action: any): UserState {
   switch (action.type) {
     case setUser.fulfilled:
