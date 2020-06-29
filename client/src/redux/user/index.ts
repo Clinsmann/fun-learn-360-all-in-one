@@ -5,7 +5,7 @@ import jsonwebtoken from "jsonwebtoken";
 const cachedUser = storage.get("user");
 
 const INITIAL_STATE: UserState = {
-  user: (jsonwebtoken.decode(cachedUser.token || "") as any).user,
+  user: (jsonwebtoken.decode(cachedUser?.token || "") as any)?.user || '',
   isAuthenticated: null,
   token: null,
   ...cachedUser,
