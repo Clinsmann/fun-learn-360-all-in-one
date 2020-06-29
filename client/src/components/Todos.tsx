@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
 import TodoItem from './TodoItem';
-import {notify} from "./Notification";
 import {RootState} from "../redux/reducers";
 import {CreateTodoPayload/*, Todo*/} from "../api/todo/types";
 import {createTodo, TodoFormState, todos} from "../redux/todo/types";
@@ -11,13 +10,11 @@ import {createTodo, TodoFormState, todos} from "../redux/todo/types";
 type IProps = MapStateProps & MapDispatchProps;
 
 const Todos: React.FC<IProps> = props => {
-
   const {
-    todos: {data: todos/*, error*/, pending},
+    todos: {data: todos, pending},
     getTodos,
     createTodo,
     createTodoState: {
-      /*error: createTodoError,*/
       pending: createTodoPending,
       success: createTodoSuccess
     }
@@ -37,11 +34,11 @@ const Todos: React.FC<IProps> = props => {
 
   useEffect(() => {
     if (createTodoSuccess) {
-      notify({title: 'Success', message: 'Todo created successfully!', variant: 'success'});
       setTodo(initTodo);
       getTodos();
     }
-  }, [createTodoSuccess, getTodos, initTodo])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createTodoSuccess])
 
   return (
     <div className='container'>

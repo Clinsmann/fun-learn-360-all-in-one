@@ -1,4 +1,4 @@
-import {MessageResponse} from "../types";
+import {MessageResponse, Message} from "../types";
 
 export interface Todo {
   _id: string;
@@ -12,7 +12,8 @@ export interface CreateTodoPayload {
 }
 
 export interface CreateTodoResponse {
-  message: MessageResponse
+  // message: MessageResponse
+  message: Message
 }
 
 export interface GetTodoResponse {

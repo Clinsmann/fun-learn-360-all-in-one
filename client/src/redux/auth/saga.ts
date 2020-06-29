@@ -5,7 +5,7 @@ import api from "../../api";
 import {AxiosResponse} from "axios";
 import storage from "../../utils/storage";
 import parseError from "../../utils/parseError";
-import {setUser, clearUser, UserState, User} from "../user/types";
+import {setUser, clearUser, UserState} from "../user/types";
 import {UserAsResponse, SignupResponse, LogoutResponse} from "../../api/auth/types";
 import {loginUser, signupUser, logoutUser, LoginAction, SignupAction,} from "./types";
 
@@ -17,7 +17,7 @@ function* login(action: LoginAction) {
     yield put({type: loginUser.fulfilled, payload: res.data});
     const data: UserState = {
       ...res.data,
-      user: (jsonwebtoken.decode(res.data.token || "")).user as User,
+      user: (jsonwebtoken.decode(res.data.token || "") as any).user,
       isAuthenticated: res.data.isAuthenticated,
       token: res.data.token
     };

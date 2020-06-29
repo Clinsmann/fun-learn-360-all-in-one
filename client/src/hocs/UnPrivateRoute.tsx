@@ -6,6 +6,7 @@ import {RootState} from "../redux/reducers";
 
 interface OwnProps {
   component: React.FC;
+  path?: string;
 }
 
 type IProps = MapStateProps & OwnProps;

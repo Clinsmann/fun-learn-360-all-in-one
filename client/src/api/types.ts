@@ -4,7 +4,7 @@ export interface QueryTypes {
   pageSize?: number;
 }
 
-interface Message {
+export interface Message {
   body: string;
   error: boolean;
 }

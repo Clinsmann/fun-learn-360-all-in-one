@@ -8,6 +8,7 @@ import {UserState} from "../redux/user/types";
 interface OwnProps {
   component: React.FC;
   roles: string[];
+  path?: string;
 }
 
 type IProps = MapStateProps & OwnProps;

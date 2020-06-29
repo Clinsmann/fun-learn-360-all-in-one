@@ -26,8 +26,8 @@ function* createNewTodos(action: CreateTodoAction) {
     const {payload} = action;
     yield put({type: createTodo.pending});
     const res: AxiosResponse<CreateTodoResponse> = yield call(api.todoService.createTodo, payload);
-    notify({title: 'Success', message: res.data.message.message.body, variant: 'success'});
-    yield put({type: createTodo.fulfilled, payload: res.data.message.message.body});
+    notify({title: 'Success', message: res.data.message.body, variant: 'success'});
+    yield put({type: createTodo.fulfilled, payload: res.data.message.body});
   } catch (error) {
     const errorMessage = error.response.data.message.body;
     // const errorMessage = parseError(error);
