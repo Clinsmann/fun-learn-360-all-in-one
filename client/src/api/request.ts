@@ -1,13 +1,12 @@
 import store from "../redux";
 import axios, {AxiosError} from "axios";
 import {logoutUser} from "../redux/auth/types";
+
 const request = axios.create({baseURL: ""});
 
 request.interceptors.request.use((config) => {
-  // return config;
-  /* todo work on this please */
   /* perform other setting u want to do on the header here*/
-  const {user: {token},} = store.getState();
+  const {user: {token}} = store.getState();
   const requiresNoToken = config.headers["noToken"];
   const newConfig = {...config};
   delete newConfig.headers["noToken"];
@@ -17,8 +16,7 @@ request.interceptors.request.use((config) => {
     ...newConfig.headers,
     Authorization: `Bearer ${token}`,
   };
-  // return newConfig;
-  return config;
+  return newConfig;
 });
 
 // Add a response interceptor

@@ -8,6 +8,7 @@ import parseError from "../../utils/parseError";
 import {setUser, clearUser, UserState} from "../user/types";
 import {UserAsResponse, SignupResponse, LogoutResponse} from "../../api/auth/types";
 import {loginUser, signupUser, logoutUser, LoginAction, SignupAction,} from "./types";
+import {notify} from "../../components/Notification";
 
 function* login(action: LoginAction) {
   try {
@@ -25,6 +26,7 @@ function* login(action: LoginAction) {
     yield call(storage.set, "user", data);
   } catch (error) {
     const errorMessage = parseError(error);
+    notify({title: 'Error', message: errorMessage, variant: 'error'});
     yield put({type: loginUser.rejected, payload: errorMessage});
   }
 }

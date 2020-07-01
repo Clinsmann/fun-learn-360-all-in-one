@@ -1,6 +1,7 @@
 const passport = require('passport');
 const User = require('./models/User');
 const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local').Strategy;
 
 const cookieExtractor = req => {
@@ -11,7 +12,8 @@ const cookieExtractor = req => {
 
 /*for authorization*/
 passport.use(new JwtStrategy({
-  jwtFromRequest: cookieExtractor,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  // jwtFromRequest: cookieExtractor,
   secretOrKey: "clinsCoder"
 }, (payload, done) => {
   User.findById({_id: payload.sub}, (err, user) => {
