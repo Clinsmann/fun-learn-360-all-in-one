@@ -12,8 +12,8 @@ const cookieExtractor = req => {
 
 /*for authorization*/
 passport.use(new JwtStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  // jwtFromRequest: cookieExtractor,
+  // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: "clinsCoder"
 }, (payload, done) => {
   User.findById({_id: payload.sub}, (err, user) => {
