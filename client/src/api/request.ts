@@ -34,7 +34,7 @@ request.interceptors.response.use(
         (error.response.status === 401 || error.response.status === 403))
     ) {
       // expired token or invalid token
-      store.dispatch({type: logoutUser.default});
+      // store.dispatch({type: logoutUser.default});
     }
     return Promise.reject(error);
   }

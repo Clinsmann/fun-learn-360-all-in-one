@@ -38,8 +38,12 @@ userRouter.post('/login', passport.authenticate('local', {session: false}), (req
 });
 
 userRouter.get('/logout', passport.authenticate('jwt', {session: false}), (req, res) => {
-  res.clearCookie('access_token');
-  res.json({user: {username: '', role: ''}, success: true});
+  // res.clearCookie('access_token');
+  req.logout();
+  req.session.destroy(err => {
+    if (!err) res.json({user: {username: '', role: ''}, success: true});
+  });
+  // res.json({user: {username: '', role: ''}, success: true});
 });
 
 userRouter.post('/todo', passport.authenticate('jwt', {session: false}), async (req, res) => {
