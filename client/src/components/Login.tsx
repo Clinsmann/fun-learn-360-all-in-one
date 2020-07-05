@@ -47,13 +47,13 @@ const Login: React.FC<IProps> = props => {
               type="text"
               name="username"
               onChange={onChange}
-              className='form-control mb-4'
+              className='form-control mb-4 form-control-lg'
               placeholder='enter username'/>
             <input
               type="password"
               name="password"
               onChange={onChange}
-              className='form-control mb-4'
+              className='form-control mb-4 form-control-lg'
               placeholder='enter password'/>
             <button
               type='submit'
