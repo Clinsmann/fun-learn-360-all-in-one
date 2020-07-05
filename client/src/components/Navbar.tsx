@@ -8,10 +8,11 @@ import {notify} from "./Notification";
 import {RootState} from "../redux/reducers";
 import {UserState} from "../redux/user/types";
 import {AuthFormState, logoutUser} from "../redux/auth/types";
+import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 type IProps = MapStateProps & MapDispatchProps;
 
-const Navbar: React.FC<IProps> = props => {
+const NavbarComponent: React.FC<IProps> = props => {
   const {logUserOut, logout: {success}, user: {isAuthenticated, user}} = props;
   const history = useHistory();
   const unauthenticatedNavLinks = ['Home', 'Login', 'Register'];
@@ -29,23 +30,33 @@ const Navbar: React.FC<IProps> = props => {
   }, [success, history])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">MERN BOILERPLATE</Link>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mr-auto">
-          {(!isAuthenticated ? unauthenticatedNavLinks : authenticatedNavLinks).map(link => (
-            <li className="nav-item" key={link}>
-              <Link className="nav-link" to={`/${link.toLowerCase()}`}>{link}</Link>
-            </li>
-          ))}
-          {isAuthenticated && (
-            <li className="nav-item" key='logout'>
-              <span className="nav-link" onClick={() => logUserOut()}>Logout</span>
-            </li>
-          )}
-        </ul>
-      </div>
-    </nav>
+    <React.Fragment>
+      <Navbar bg="light" variant="light" expand="lg">
+        <Navbar.Brand as={Link} to="/">MERN BOILERPLATE</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            {(!isAuthenticated ? unauthenticatedNavLinks : authenticatedNavLinks).map(link => (
+              <Nav.Link as={Link} key={link} to={`/${link.toLowerCase()}`}>{link}</Nav.Link>
+            ))}
+            {isAuthenticated && (
+              <Nav.Link as={Link} key='logout' to='#' onClick={() => logUserOut()}>Logout</Nav.Link>
+            )}
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider/>
+              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
+            <Button variant="outline-success">Search</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Navbar>
+    </React.Fragment>
   );
 };
 
@@ -67,4 +78,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchProps => ({
   logUserOut: () => dispatch({type: logoutUser.default})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarComponent);

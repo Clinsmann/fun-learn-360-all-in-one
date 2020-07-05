@@ -1,4 +1,6 @@
 import React from 'react';
+import './App.scss';
+import './assets/styles/index.scss';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
