@@ -3,9 +3,10 @@ import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {notify} from "./Notification";
 import {RootState} from "../redux/reducers";
+import {notify} from "../components/Notification";
 import {LoginCredentials} from "../api/auth/types";
+import {Button, Col, Container, Row, Form} from "react-bootstrap";
 import {AuthFormState, clearLoginData, loginUser, clearLogoutData, clearLoginError} from "../redux/auth/types";
 
 type IProps = MapStateProps & MapDispatchProps;
@@ -38,33 +39,38 @@ const Login: React.FC<IProps> = props => {
   }, [success, history]);
 
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='mx-auto py-5 col-md-5 col-12'>
-          <form onSubmit={onSubmit} className=''>
-            <h3 className='text-center mb-3'>Please sign in</h3>
-            <input
-              type="text"
-              name="username"
-              onChange={onChange}
-              className='form-control mb-4 form-control-lg'
-              placeholder='enter username'/>
-            <input
-              type="password"
-              name="password"
-              onChange={onChange}
-              className='form-control mb-4 form-control-lg'
-              placeholder='enter password'/>
-            <button
+    <Container>
+      <Row>
+        <Col md={6} lg={4} className='mx-auto py-5'>
+          <form onSubmit={onSubmit}>
+            <h4 className='text-center mb-3'>Please sign in</h4>
+            <Form.Group controlId="email">
+              <Form.Control
+                type="text"
+                name='username'
+                onChange={onChange}
+                value={user.username}
+                placeholder="Enter username"/>
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Control
+                type="password"
+                name="password"
+                onChange={onChange}
+                value={user.password}
+                placeholder="Enter password"/>
+            </Form.Group>
+            <Button
               type='submit'
+              variant='primary'
               disabled={pending}
-              className='btn btn-lg btn-primary btn-block mt-3'>
+              className='btn-block'>
               Login
-            </button>
+            </Button>
           </form>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

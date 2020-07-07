@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import {connect} from 'react-redux';
 import {Dispatch} from "redux";
 
-import TodoItem from './TodoItem';
 import {RootState} from "../redux/reducers";
+import TodoItem from '../components/TodoItem';
 import {CreateTodoPayload/*, Todo*/} from "../api/todo/types";
 import {createTodo, TodoFormState, todos} from "../redux/todo/types";
 

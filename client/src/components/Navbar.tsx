@@ -8,7 +8,7 @@ import {notify} from "./Notification";
 import {RootState} from "../redux/reducers";
 import {UserState} from "../redux/user/types";
 import {AuthFormState, logoutUser} from "../redux/auth/types";
-import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 type IProps = MapStateProps & MapDispatchProps;
 
@@ -30,9 +30,9 @@ const NavbarComponent: React.FC<IProps> = props => {
   }, [success, history])
 
   return (
-    <React.Fragment>
-      <Navbar bg="light" variant="light" expand="lg">
-        <Navbar.Brand as={Link} to="/">MERN BOILERPLATE</Navbar.Brand>
+    <Navbar bg="light" variant="light" expand="lg">
+      <Container>
+        <Navbar.Brand as={Link} to="/">MERN BP</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -55,8 +55,8 @@ const NavbarComponent: React.FC<IProps> = props => {
             <Button variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
-      </Navbar>
-    </React.Fragment>
+      </Container>
+    </Navbar>
   );
 };
 

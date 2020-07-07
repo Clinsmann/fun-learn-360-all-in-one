@@ -12,7 +12,7 @@ const variantIcon: any = {
   success: <SuccessIcon/>
 };
 
-interface NotifyProps {
+export interface NotifyProps {
   title: string;
   message: string;
   variant: 'success' | 'warning' | 'error';

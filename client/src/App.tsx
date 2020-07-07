@@ -5,12 +5,12 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Home from './components/Home';
-import Admin from './components/Admin';
-import Login from "./components/Login";
-import Todos from "./components/Todos";
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Login from "./pages/Login";
+import Todos from "./pages/Todos";
+import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
-import Register from "./components/Register";
 import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
 
